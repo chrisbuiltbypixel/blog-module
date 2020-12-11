@@ -12,4 +12,4 @@
  */
 
 Route::get('/blogs', 'Web\BlogController@index');
-Route::get('/blogs/{id}', 'Web\BlogController@show');
+Route::get('/blogs/{slug}', 'Web\BlogController@show');

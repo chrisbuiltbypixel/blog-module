@@ -17,6 +17,11 @@ class BlogService
         return $this->model->wherePublished($bool)->get();
     }
 
+    public function getBySlug($slug)
+    {
+        return $this->model->where('slug', $slug)->first();
+    }
+
     /**
      * count the model data
      *

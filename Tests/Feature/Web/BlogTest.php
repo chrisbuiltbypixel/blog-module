@@ -30,7 +30,7 @@ class BlogTest extends TestCase
     {
         $blog = Blog::factory()->create();
 
-        $response = $this->get("blogs/$blog->id");
+        $response = $this->get("blogs/$blog->slug");
 
         $response->assertStatus(200);
 

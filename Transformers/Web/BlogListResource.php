@@ -17,8 +17,9 @@ class BlogListResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'slug' => $this->slug,
+            'created_at' => $this->created_at->diffForHumans(),
+            'updated_at' => $this->updated_at->diffForHumans(),
         ];
     }
 }

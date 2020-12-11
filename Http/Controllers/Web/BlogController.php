@@ -32,9 +32,10 @@ class BlogController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show(Blog $blog)
+    public function show($slug)
     {
-        return new BlogResource($blog);
+
+        return new BlogResource($this->blog->getBySlug($slug));
     }
 
 }
