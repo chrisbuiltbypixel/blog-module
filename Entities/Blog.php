@@ -3,13 +3,14 @@
 namespace Modules\Blog\Entities;
 
 use Modules\Blog\Database\factories\BlogFactory;
+use Laravel\Scout\Searchable;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Blog extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable, FilteredSearch;
 
     protected $fillable = [
         'title',
@@ -36,6 +37,15 @@ class Blog extends Model
     {
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = Str::slug($value);
+    }
 
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return $this->only('id', 'title');
     }
 }

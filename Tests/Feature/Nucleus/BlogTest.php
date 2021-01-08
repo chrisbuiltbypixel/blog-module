@@ -20,9 +20,14 @@ class BlogTest extends TestCase
 
     public function test_we_can_list_blogs()
     {
-        $blogs = Blog::factory()->times(10)->create();
+        $blogs = Blog::factory()->times(50)->create();
 
-        $response = $this->get('api/blogs');
+        $response = $this->json('GET', 'api/blogs', [
+            "search" => "",
+            "order" => "id",
+            "sort" => "ASC",
+            "paginate" => 25,
+        ]);
 
         $response->assertStatus(200);
     }
@@ -57,7 +62,7 @@ class BlogTest extends TestCase
 
         $response = $this->put("api/blogs/$blog->id", $data);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
 
         $blog->refresh();
 
@@ -78,7 +83,7 @@ class BlogTest extends TestCase
 
         $response = $this->delete('api/blogs', $data);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
 
         $this->assertDatabaseCount('blogs', 0);
 
@@ -98,7 +103,7 @@ class BlogTest extends TestCase
 
         $response = $this->put("api/blogs/$blog->id", $data);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
 
         $blog->refresh();
 
@@ -120,7 +125,7 @@ class BlogTest extends TestCase
 
         $response = $this->put("api/blogs/$blog->id", $data);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
 
         $blog->refresh();
 

@@ -14,7 +14,7 @@ class BlogService
 
     public function getPublishedBlogs($bool = true)
     {
-        return $this->model->wherePublished($bool)->get();
+        return $this->model->wherePublished($bool)->paginate(15);
     }
 
     public function getBySlug($slug)

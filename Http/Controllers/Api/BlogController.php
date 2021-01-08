@@ -25,9 +25,9 @@ class BlogController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return BlogListResource::collection($this->blog->all());
+        return BlogListResource::collection(Blog::filteredSearch($request));
     }
 
     /**
@@ -37,7 +37,9 @@ class BlogController extends Controller
      */
     public function store(StoreBlog $request)
     {
-        return $this->blog->store($request->validated());
+        $this->blog->store($request->validated());
+
+        return response()->success('The new blog has been saved');
     }
 
     /**
@@ -48,7 +50,6 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         return new BlogResource($blog);
-
     }
 
     /**
@@ -61,7 +62,7 @@ class BlogController extends Controller
     {
         $this->blog->update($blog->id, $request->validated());
 
-        return $blog;
+        return response()->success('Blog has been updated');
     }
 
     /**
@@ -71,6 +72,8 @@ class BlogController extends Controller
      */
     public function destroy(Request $request)
     {
-        return $this->blog->deleteMultiple($request->id);
+        $this->blog->deleteMultiple($request->id);
+
+        return response()->success('Deleted successfully');
     }
 }
