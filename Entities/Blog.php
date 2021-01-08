@@ -7,6 +7,7 @@ use Laravel\Scout\Searchable;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\FilteredSearch;
 
 class Blog extends Model
 {
